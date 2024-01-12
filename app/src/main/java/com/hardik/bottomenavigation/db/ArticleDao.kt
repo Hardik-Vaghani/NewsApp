@@ -19,4 +19,11 @@ interface ArticleDao {
 
     @Delete
     suspend fun deleteArticle(article: Article)
+
+    @Query("SELECT EXISTS (SELECT 1 FROM articles WHERE title = :title LIMIT 1)")
+    fun containsArticle(title: String): LiveData<Boolean>
+
+    @Query("SELECT EXISTS (SELECT 1 FROM articles WHERE title = :title AND content = :content LIMIT 1)")
+    fun containsArticle(title: String, content: String): LiveData<Boolean>
+
 }

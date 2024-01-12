@@ -6,16 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.SearchNewsFragment">
 
-    <EditText
-        android:id="@+id/etSearch"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search..."
-        android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="5dp"
+        app:counterTextColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:boxStrokeColor="@color/purple_500"
+        app:cursorColor="@color/purple_500"
+        android:focusable="true">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search..."
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:visibility="visible" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchNews"
@@ -24,7 +38,7 @@
         android:paddingBottom="50dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSearch"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         tools:layout_editor_absoluteX="0dp" />
 
     <ProgressBar

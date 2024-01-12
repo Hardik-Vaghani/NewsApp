@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.ArticleFragment">
+    tools:context=".ui.ArticleActivity">
 
     <WebView
         android:id="@+id/webView"
@@ -23,8 +23,27 @@
         android:contentDescription="@string/floatingActionButton"
         android:src="@drawable/ic_favorite"
         app:fabSize="normal"
+        android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/fav_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="05dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:soundEffectsEnabled="true"
+        android:src="@drawable/ic_favorite"
+        android:tint="@color/cardview_dark_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/image"
+        app:shapeAppearanceOverlay="@style/curved" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

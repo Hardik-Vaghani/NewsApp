@@ -20,4 +20,7 @@
     </style>
     <style name="Theme.BottomNavigation.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="Theme.BottomNavigation.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="curved">
+        <item name="cornerSize">15%</item>
+    </style>
 </resources>

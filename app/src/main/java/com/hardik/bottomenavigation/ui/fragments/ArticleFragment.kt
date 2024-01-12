@@ -73,15 +73,12 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
                 if (scrollY > oldScrollY && isBottomNavigationViewVisible) {
                     //Scrolling down, hide the toolbar
                    hideBottomNavigationView()
-
                 } else if (scrollY < oldScrollY && !isBottomNavigationViewVisible) {
                     //Scrolling up, show the toolbar
                     showBottomNavigationView()
                 }
-
             }
         })
-
     }
 
     private fun hideBottomNavigationView() {

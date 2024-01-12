@@ -1,5 +1,6 @@
 package com.hardik.bottomenavigation.ui.fragments
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,7 @@ import com.hardik.bottomenavigation.R
 import com.hardik.bottomenavigation.adapters.NewsAdapter
 import com.hardik.bottomenavigation.models.Article
 import com.hardik.bottomenavigation.models.Source
+import com.hardik.bottomenavigation.ui.ArticleActivity
 import com.hardik.bottomenavigation.ui.NewsActivity
 import com.hardik.bottomenavigation.ui.NewsViewModel
 import com.hardik.bottomenavigation.util.Constants.Companion.COUNTRY_CODE
@@ -52,8 +54,12 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
 //            val value = bundle.getSerializable("article") as? Article
 
 
-            findNavController().navigate(BreakingNewsFragmentDirections.actionBreakingNewsFragmentToArticleFragment(it))
+//            findNavController().navigate(BreakingNewsFragmentDirections.actionBreakingNewsFragmentToArticleFragment(it))
 //            findNavController().navigate(R.id.action_breakingNewsFragment_to_articleFragment, Bundle().apply { putSerializable("article", it)as? Article})
+
+            val intent = Intent(activity, ArticleActivity::class.java)
+            intent.putExtra("article", it)
+            startActivity(intent)
         }
 
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->

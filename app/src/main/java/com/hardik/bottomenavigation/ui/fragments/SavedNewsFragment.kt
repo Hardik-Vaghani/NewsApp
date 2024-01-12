@@ -1,5 +1,6 @@
 package com.hardik.bottomenavigation.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.hardik.bottomenavigation.R
 import com.hardik.bottomenavigation.adapters.NewsAdapter
+import com.hardik.bottomenavigation.ui.ArticleActivity
 import com.hardik.bottomenavigation.ui.NewsActivity
 import com.hardik.bottomenavigation.ui.NewsViewModel
 
@@ -32,13 +34,17 @@ class SavedNewsFragment :Fragment(R.layout.fragment_saved_news) {
         setupRecyclerView()
 
         newsAdapter.setOnItemClickListener {
-            val bundle = Bundle().apply {
-                putSerializable("article", it)
-            }
-            findNavController().navigate(
-                R.id.action_savedNewsFragment_to_articleFragment,
-                bundle
-            )
+//            val bundle = Bundle().apply {
+//                putSerializable("article", it)
+//            }
+//            findNavController().navigate(
+//                R.id.action_savedNewsFragment_to_articleFragment,
+//                bundle
+//            )
+
+            val intent = Intent(activity, ArticleActivity::class.java)
+            intent.putExtra("article", it)
+            startActivity(intent)
         }
 
         val itemTouchHelperCallBack = object :ItemTouchHelper.SimpleCallback(
@@ -73,7 +79,6 @@ class SavedNewsFragment :Fragment(R.layout.fragment_saved_news) {
 
         viewModel.getSavedNews().observe(viewLifecycleOwner, Observer {articles ->
             newsAdapter.differ.submitList(articles)
-
         })
     }
 

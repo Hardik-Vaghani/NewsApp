@@ -1,5 +1,6 @@
 package com.hardik.bottomenavigation.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,8 +17,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.hardik.bottomenavigation.R
 import com.hardik.bottomenavigation.adapters.NewsAdapter
+import com.hardik.bottomenavigation.ui.ArticleActivity
 import com.hardik.bottomenavigation.ui.NewsActivity
 import com.hardik.bottomenavigation.ui.NewsViewModel
 import com.hardik.bottomenavigation.util.Constants
@@ -50,13 +55,11 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
         newsAdapter.setOnItemClickListener {
             Log.e(TAG, "Article title: ${it.title +"\n Article url: "+ it.url}")
-            val bundle = Bundle().apply {
-                putSerializable("article", it)
-            }
-            findNavController().navigate(
-                R.id.action_searchNewsFragment_to_articleFragment,
-                bundle
-            )
+//            val bundle = Bundle().apply { putSerializable("article", it) }
+//            findNavController().navigate(R.id.action_searchNewsFragment_to_articleFragment, bundle)
+            val intent = Intent(activity, ArticleActivity::class.java)
+            intent.putExtra("article", it)
+            startActivity(intent)
         }
 
         var job: Job? = null
@@ -71,7 +74,6 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
                 }
             }
         }
-
         viewModel.searchNews.observe(viewLifecycleOwner, Observer{ response ->
             when(response){
                 is Resource.Success -> {

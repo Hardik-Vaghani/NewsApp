@@ -29,4 +29,7 @@ class NewsRepository(val db: ArticleDatabase) {
 
     suspend fun deleteArticle(article: Article) = db.getArticleDao().deleteArticle(article)
 
+    fun containsArticle(title: String, content: String) = db.getArticleDao().containsArticle(title,content)
+    fun containsArticle(title: String) = db.getArticleDao().containsArticle(title)
+
 }

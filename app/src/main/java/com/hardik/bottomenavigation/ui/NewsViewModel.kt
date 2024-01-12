@@ -96,6 +96,9 @@ class NewsViewModel(app: Application, val newsRepository: NewsRepository) : Andr
         newsRepository.deleteArticle(article)
     }
 
+    fun containsArticle(title: String, content: String) = newsRepository.containsArticle(title,content)
+    fun containsArticle(title: String) = newsRepository.containsArticle(title)
+
     private suspend fun safeSearchNewsCall(searchQuery: String) {
         searchNews.postValue(Resource.Loading())
         try {
