@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="floatingActionButton">floatingActionButton</string>
+    <!--    <string name="title_home">Home</string>-->
+</resources>
