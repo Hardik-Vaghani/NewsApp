@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.hardik.newsapp.R
 import com.hardik.newsapp.databinding.ItemArticlePreviewBinding
 import com.hardik.newsapp.models.Article
 import com.hardik.newsapp.models.Source
@@ -67,7 +69,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         holder.itemView.animate().alpha(1f).setDuration(500).start()
 
         holder.itemView.apply {
-            Glide.with(this).load(article.urlToImage).into(holder.ivArticleImage)
+//            Glide.with(this).load(ContextCompat.getDrawable(this.context, R.drawable.ic_launcher_foreground)).into(holder.binding.ivArticleImage)
+//            Glide.with(this).load(resources.getDrawable(R.drawable.ic_launcher_background,this.context.theme)).into(holder.binding.ivArticleImage)
+            Glide.with(this).load(article.urlToImage).centerCrop().placeholder(ContextCompat.getDrawable(this.context,
+                R.drawable.ic_launcher_foreground)).into(holder.ivArticleImage)
             holder.tvSource.text = article.source?.name
             holder.tvTitle.text = article.title
             holder.tvDescription.text = article.description
@@ -81,7 +86,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
                             content = article.content ?: "",
                             description = article.description ?: "",
                             publishedAt = article.publishedAt ?: "",
-                            source = Source(id = article.source?.id ?: "", name = article.source?.name ?: ""),
+                            source = Source(
+                                id = article.source?.id ?: "",
+                                name = article.source?.name ?: ""
+                            ),
                             title = article.title ?: "",
                             url = article.url ?: "",
                             urlToImage = article.urlToImage ?: ""
