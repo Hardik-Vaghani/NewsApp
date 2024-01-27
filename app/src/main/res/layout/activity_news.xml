@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/Theme.BottomNavigation.AppBarOverlay"
+        android:theme="@style/Theme.NewsApp.AppBarOverlay"
         app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
         <androidx.appcompat.widget.Toolbar
@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:popupTheme="@style/Theme.BottomNavigation.PopupOverlay" />
+            app:popupTheme="@style/Theme.NewsApp.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

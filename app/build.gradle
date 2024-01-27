@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.hardik.bottomenavigation'
+    namespace 'com.hardik.newsapp'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.hardik.bottomenavigation"
+        applicationId "com.hardik.newsapp"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -35,6 +35,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -43,6 +47,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+//    implementation 'androidx.core:core-ktx:+'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

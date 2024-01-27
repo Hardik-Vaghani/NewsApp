@@ -1,0 +1,29 @@
+package com.hardik.newsapp.db
+
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.hardik.newsapp.models.Article
+
+@Dao
+interface ArticleDao {
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsert(article: Article): Long
+
+    @Query("SELECT * FROM articles")
+    fun getAllArticles(): LiveData<List<Article>>
+
+    @Delete
+    suspend fun deleteArticle(article: Article)
+
+    @Query("SELECT EXISTS (SELECT 1 FROM articles WHERE title = :title LIMIT 1)")
+    fun containsArticle(title: String): LiveData<Boolean>
+
+    @Query("SELECT EXISTS (SELECT 1 FROM articles WHERE title = :title AND content = :content LIMIT 1)")
+    fun containsArticle(title: String, content: String): LiveData<Boolean>
+
+}

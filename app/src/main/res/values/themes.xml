@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- Base application theme. -->
-    <style name="Theme.BottomNavigation" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.NewsApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -14,12 +14,12 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.BottomNavigation.NoActionBar">
+    <style name="Theme.NewsApp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Theme.BottomNavigation.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="Theme.BottomNavigation.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="Theme.NewsApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.NewsApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
     <style name="curved">
         <item name="cornerSize">15%</item>
     </style>

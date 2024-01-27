@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/breakingNewsFragment"
-        android:name="com.hardik.bottomenavigation.ui.fragments.BreakingNewsFragment"
+        android:name="com.hardik.newsapp.ui.fragments.BreakingNewsFragment"
         android:label="Breaking News"
         tools:layout="@layout/fragment_breaking_news">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/savedNewsFragment"
-        android:name="com.hardik.bottomenavigation.ui.fragments.SavedNewsFragment"
+        android:name="com.hardik.newsapp.ui.fragments.SavedNewsFragment"
         android:label="Saved News"
         tools:layout="@layout/fragment_saved_news">
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchNewsFragment"
-        android:name="com.hardik.bottomenavigation.ui.fragments.SearchNewsFragment"
+        android:name="com.hardik.newsapp.ui.fragments.SearchNewsFragment"
         android:label="Search News"
         tools:layout="@layout/fragment_search_news">
         <action
@@ -46,11 +46,11 @@
     </fragment>
     <fragment
         android:id="@+id/articleFragment"
-        android:name="com.hardik.bottomenavigation.ui.fragments.ArticleFragment"
+        android:name="com.hardik.newsapp.ui.fragments.ArticleFragment"
         android:label="Article"
         tools:layout="@layout/fragment_article" >
         <argument
             android:name="article"
-            app:argType="com.hardik.bottomenavigation.models.Article" />
+            app:argType="com.hardik.newsapp.models.Article" />
     </fragment>
 </navigation>
