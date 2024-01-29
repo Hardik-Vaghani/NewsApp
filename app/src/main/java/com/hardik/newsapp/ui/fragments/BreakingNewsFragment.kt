@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.hardik.newsapp.R
 import com.hardik.newsapp.adapters.NewsAdapter
 import com.hardik.newsapp.ui.ArticleActivity
@@ -28,13 +29,16 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
     lateinit var viewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
+    lateinit var shimmer_layout: ShimmerFrameLayout
     lateinit var rvBreakingNews: RecyclerView
     lateinit var paginationProgressBar: ProgressBar
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = (activity as NewsActivity).viewModel
+        shimmer_layout = view.findViewById(R.id.shimmer_layout)
         rvBreakingNews = view.findViewById(R.id.rvBreakingNews)
         paginationProgressBar = view.findViewById(R.id.paginationProgressBar)
 
@@ -62,6 +66,7 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
                     hideProgressBar()
                     response.data?.let { newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.articles.toList())
+                        showRecyclerView()
                         val totalPage = newsResponse.totalResults / QUERY_PAGE_SIZE * 2
                         isLastPage = viewModel.breakingNewsPage == totalPage
                         if (isLastPage) {
@@ -80,6 +85,7 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
                 }
 
                 is Resource.Loading -> {
+                    shimmer_layout.startShimmer()
                     showProgressBar()
                 }
             }
@@ -136,7 +142,16 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
             addOnScrollListener(this@BreakingNewsFragment.scrollListener)
-            addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.VERTICAL))
+            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+            setHasFixedSize(true)
         }
+    }
+
+    private fun showRecyclerView() {
+        shimmer_layout.apply {
+            stopShimmer()
+            visibility = View.GONE
+        }
+       rvBreakingNews.visibility = View.VISIBLE
     }
 }

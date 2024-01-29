@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.hardik.newsapp.R
 import com.hardik.newsapp.adapters.NewsAdapter
 import com.hardik.newsapp.ui.ArticleActivity
@@ -32,7 +33,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
     lateinit var viewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
-
+    lateinit var shimmer_layout: ShimmerFrameLayout
     lateinit var rvSearchNews: RecyclerView
     lateinit var paginationProgressBar: ProgressBar
     lateinit var etSearch: EditText
@@ -43,6 +44,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
         viewModel = (activity as NewsActivity).viewModel
 
         etSearch = view.findViewById(R.id.etSearch)
+        shimmer_layout = view.findViewById(R.id.shimmer_layout)
         rvSearchNews = view.findViewById(R.id.rvSearchNews)
         paginationProgressBar = view.findViewById(R.id.paginationProgressBar)
 
@@ -75,6 +77,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
                     hideProgressBar()
                     response.data?.let {newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.articles.toList())
+                        showRecyclerView()
                         val totalPage = newsResponse.totalResults / Constants.QUERY_PAGE_SIZE * 2
                         isLastPage = viewModel.searchNewsPage == totalPage
                         if(isLastPage){
@@ -90,6 +93,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
                     }
                 }
                 is Resource.Loading -> {
+                    shimmer_layout.startShimmer()
                     showProgressBar()
                 }
             }
@@ -146,5 +150,13 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             addOnScrollListener(this@SearchNewsFragment.scrollListener)
             addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.VERTICAL))
         }
+    }
+
+    private fun showRecyclerView() {
+        shimmer_layout.apply {
+            stopShimmer()
+            visibility = View.GONE
+        }
+        rvSearchNews.visibility = View.VISIBLE
     }
 }

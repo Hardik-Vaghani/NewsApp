@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
 import com.hardik.newsapp.R
 import com.hardik.newsapp.adapters.NewsAdapter
@@ -21,12 +22,14 @@ class SavedNewsFragment :Fragment(R.layout.fragment_saved_news) {
     lateinit var viewModel: NewsViewModel
 
     lateinit var newsAdapter: NewsAdapter
+    lateinit var shimmer_layout: ShimmerFrameLayout
     lateinit var rvSavedNews: RecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as NewsActivity).viewModel
 
+        shimmer_layout = view.findViewById(R.id.shimmer_layout)
         rvSavedNews = view.findViewById(R.id.rvSavedNews)
 
         setupRecyclerView()
@@ -77,6 +80,7 @@ class SavedNewsFragment :Fragment(R.layout.fragment_saved_news) {
 
         viewModel.getSavedNews().observe(viewLifecycleOwner, Observer {articles ->
             newsAdapter.differ.submitList(articles)
+            showRecyclerView()
         })
     }
 
@@ -87,5 +91,12 @@ class SavedNewsFragment :Fragment(R.layout.fragment_saved_news) {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.VERTICAL))
         }
+    }
+    private fun showRecyclerView() {
+        shimmer_layout.apply {
+            stopShimmer()
+            visibility = View.GONE
+        }
+        rvSavedNews.visibility = View.VISIBLE
     }
 }
